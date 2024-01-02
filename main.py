@@ -4,7 +4,7 @@ from keypoint_detection_model_loader import KeypointDetectionModelLoader
 from analysis_module import AnalysisModule
 
 def main():
-    camera_streamer = CameraStreamer(0)  # 0 for default webcam, replace it with the IP address for IP cameras
+    camera_streamer = CameraStreamer()  # 0 for default webcam, replace it with the IP address for IP cameras
     yolo_model_loader = YOLOv8ModelLoader()
     keypoint_model_loader =KeypointDetectionModelLoader()
     analysis_module = AnalysisModule(camera_streamer, keypoint_model_loader, yolo_model_loader)
