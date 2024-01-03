@@ -1,5 +1,6 @@
 import cv2
 import time
+from ultralytics import YOLO
 
 class CameraStreamer:
     def __init__(self, source=0):
@@ -7,6 +8,7 @@ class CameraStreamer:
         self.cap = cv2.VideoCapture(source)   
         self.start_time = time.time()
         self.frame_count = 0
+        self.model = YOLO('yolov8m.pt')
 
     def get_frame(self):
         ret, frame = self.cap.read()
@@ -19,7 +21,7 @@ class CameraStreamer:
             frame = self.get_frame()
             if frame is None:
                 break
-
+            
             # Calculate FPS
             self.frame_count += 1
             elapsed_time = time.time() - self.start_time
@@ -28,8 +30,8 @@ class CameraStreamer:
             # Display FPS on the frame
             cv2.putText(frame, f"FPS: {fps:.2f}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-            # Display the frame
-            cv2.imshow("Camera Stream", frame)
+            # Display the frame           
+            results=self.model(source=frame, show=True, conf=0.4, save=True)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

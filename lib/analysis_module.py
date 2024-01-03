@@ -11,6 +11,7 @@ class AnalysisModule:
             while True:
                 frame = self.camera_loader.get_frame()
                 self.camera_loader.start_streaming()
+                
                 # Run YOLOv8 object detection
                 yolo_objects = self.yolo_model_loader.detect_objects(frame)
                 

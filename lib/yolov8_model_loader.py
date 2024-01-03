@@ -8,7 +8,7 @@ class YOLOv8ModelLoader:
     def detect_objects(self, frame):
         # Run YOLOv8 object detection on the frame
         detections = self.model.predict(frame)
-
+        
         # Process detections and extract relevant information
         objects = []
         for detection in detections:
@@ -29,3 +29,5 @@ class YOLOv8ModelLoader:
             
             #print(detection)
         return objects
+    
+    
