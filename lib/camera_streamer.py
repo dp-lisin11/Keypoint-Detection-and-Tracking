@@ -1,6 +1,7 @@
 import cv2
 import time
 from ultralytics import YOLO
+#from Pose_detection import PoseDetectionModelLoader
 
 class CameraStreamer:
     def __init__(self, source=0):
@@ -9,6 +10,7 @@ class CameraStreamer:
         self.start_time = time.time()
         self.frame_count = 0
         self.model = YOLO('yolov8m.pt')
+        #self.pose_loader=PoseDetectionModelLoader()
 
     def get_frame(self):
         ret, frame = self.cap.read()
@@ -30,8 +32,9 @@ class CameraStreamer:
             # Display FPS on the frame
             cv2.putText(frame, f"FPS: {fps:.2f}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-            # Display the frame           
-            results=self.model(source=frame, show=True, conf=0.4, save=True)
+            # Display the frame
+            self.model(source=frame, show=True, conf=0.4, save=True)           
+            ## self.pose_loader.detectPose(frame ,frame, draw=True, display=True) -> use for viewing keypoints
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -46,5 +49,4 @@ class CameraStreamer:
 if __name__ == "__main__":
     camera_streamer = CameraStreamer()  
     camera_streamer.start_streaming()
-
-    # camera_streamer.release_camera()
+    camera_streamer.release_camera()

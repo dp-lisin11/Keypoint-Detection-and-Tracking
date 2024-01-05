@@ -16,11 +16,11 @@ class YOLOv8ModelLoader:
                 box=detection[0].boxes
                 bbox=detection[0].boxes.xyxy
                 confidence=detection[0].boxes.conf.item()
-                class_id = detection[0].names[box.cls[0].item()]
+                class_name = detection[0].names[box.cls[0].item()]
                 
                 # Append the detected object information to the result list
                 objects.append({
-                    'class': class_id,
+                    'class': class_name,
                     'confidence': confidence,
                     'bbox': bbox.tolist()  # Convert NumPy array to list
                 })
