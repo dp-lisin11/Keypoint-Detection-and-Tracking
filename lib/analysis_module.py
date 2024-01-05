@@ -12,6 +12,7 @@ class AnalysisModule:
     def start_analysis(self, output_file):
         with open(output_file, 'w') as json_file:
             while True:
+                # Get the frame from camera_streamer and start streaming
                 frame = self.camera_loader.get_frame()
                 self.camera_loader.start_streaming()
                 
