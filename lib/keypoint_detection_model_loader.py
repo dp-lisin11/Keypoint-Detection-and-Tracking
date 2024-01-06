@@ -33,5 +33,24 @@ class KeypointDetectionModelLoader:
                 })
 
         return {"Landmarks": landmarks_info}
+    
+    # This function returns True if a person has crossed the line, False otherwise.
+    def has_crossed_line(self, frame, line_end, line_start):
+    # Get the coordinates of the detected pose landmarks
+        results = mp_pose.Pose(static_image_mode=True).process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        landmarks = results.pose_landmarks.landmark
+
+    # Choose a suitable keypoint to track (foot)
+        rfoot_x = int(landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].x * frame.shape[1])
+        rfoot_y = int(landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y * frame.shape[0])
+        lfoot_x = int(landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].x * frame.shape[1])
+        lfoot_y = int(landmarks[mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value].y * frame.shape[0])
+
+    # Check if the foot is below the line and has crossed it horizontally
+        if (rfoot_y > line_end[1] and rfoot_x > line_start[0] and rfoot_x < line_end[0]) or (lfoot_y > line_end[1] and lfoot_x > line_start[0] and lfoot_x < line_end[0]):
+            return True
+        else:
+            return False
+        
 
 

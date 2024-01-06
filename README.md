@@ -1,4 +1,5 @@
 # Keypoint Detection and Tracking
+
 ## Overview
 This project consists of two modules: Camera Streamer and Analysis. The Camera Streamer module captures video streams from different sources, including webcams and IP cameras, and provides a method for starting the streaming process. The Analysis module utilizes the Camera Streamer module and integrates YOLOv8 object detection and MediaPipe keypoint detection to analyze frames from the camera stream. The analysis results are saved in a JSON file.
 

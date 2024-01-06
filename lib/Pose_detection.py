@@ -19,7 +19,7 @@ class PoseDetectionModelLoader:
         self.pose_video=pose_video
         
         
-    def detectPose(self, frame,pose_video, draw=False, display=False):
+    def detectPose(self, frame, pose_video, draw=False, display=False):
         original_image = frame.copy()  
         image_in_RGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         resultant = self.pose_video.process(image_in_RGB)
