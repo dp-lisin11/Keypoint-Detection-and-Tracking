@@ -1,5 +1,22 @@
 # Keypoint Detection and Tracking
-
+## Project Structure
+```css
+project_directory/
+│
+├── res/
+│   ├── img/
+│   └── vid/
+│
+├── utils/
+│   ├── analysis_module.py
+│   ├── camera_streamer.py
+│   ├── keypoint_detection_model_loader.py
+│   └── yolov8_model_loader.py
+│
+├── main.py
+├── readme.md
+└── requirements.txt
+```
 ## Overview
 This project consists of two modules: Camera Streamer and Analysis. The Camera Streamer module captures video streams from different sources, including webcams and IP cameras, and provides a method for starting the streaming process. The Analysis module utilizes the Camera Streamer module and integrates YOLOv8 object detection and MediaPipe keypoint detection to analyze frames from the camera stream. The analysis results are saved in a JSON file.
 
