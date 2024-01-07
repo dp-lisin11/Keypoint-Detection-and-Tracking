@@ -102,3 +102,12 @@ Example Output:
 ...
 ]
 ```
+### Additional Feature
+Boolean function determining if a person as crossed a given line.
+
+Usage:
+```python
+# Define line coordinates as per requirements
+is_line-crossed = keypoint_loader.has_crossed_line(frame, line_end, line_start)
+print(is_line-crossed) #gives out as either true or false
+```
