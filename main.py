@@ -9,6 +9,7 @@ from analysis_module import AnalysisModule
 
 def main():  
     # 0 for default webcam, replace it with the IP address for IP cameras  
+    vid_cap="res\vid\people-detection.mp4"
     camera_streamer = CameraStreamer(0)
     # pose_loader=PoseDetectionModelLoader()
     

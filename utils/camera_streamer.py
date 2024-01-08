@@ -10,7 +10,7 @@ mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 
 class CameraStreamer:
-    def __init__(self, source=0):
+    def __init__(self, source):
         self.source = source
         self.cap = cv2.VideoCapture(source)   
         self.model = YOLO('yolov8m.pt')
@@ -36,7 +36,7 @@ class CameraStreamer:
             """
             The following code is to view landmarks in the camera stream
             """
-            results = mp_pose.Pose(static_image_mode=True).process(frame)   
+            results = mp_pose.Pose(static_image_mode=False).process(frame)   
             circle_radius = int(.007 * frame.shape[1])
             # Specifies the drawing style for the 'landmarks'.
             point_spec = mp_drawing.DrawingSpec(color=(220, 100, 0), thickness=-1, circle_radius=circle_radius)
@@ -56,10 +56,10 @@ class CameraStreamer:
             *** change line_start and line_end as per requirement  
             """
             
-            if keypoint_detector.has_crossed_line(frame,line_end=(640, 200),line_start=(0, 200)) and results.pose_landmarks:
-                cv2.line(frame, (0, 200), (640, 200), (0, 0, 255), 2)
+            if keypoint_detector.has_crossed_line(frame,line_end=(640, 300),line_start=(500, 300)):
+                cv2.line(frame, (0, 200), (640, 200), (0, 0, 255), 1)
                 print("Line crossed")
-            cv2.line(frame, (0, 200), (640, 200), (0, 255, 0), 2)
+            cv2.line(frame, (0, 200), (640, 200), (0, 255, 0), 1)
         
             
            # Display the frame
@@ -74,7 +74,7 @@ class CameraStreamer:
         self.cap.release()
 
 
-if __name__ == "__main__":
-    camera_streamer = CameraStreamer()  
-    camera_streamer.start_streaming()
-    camera_streamer.release_camera()
+# if __name__ == "__main__":
+#     camera_streamer = CameraStreamer("res\vid\people-detection.mp4")  
+#     camera_streamer.start_streaming()
+#     camera_streamer.release_camera()
